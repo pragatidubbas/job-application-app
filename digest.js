@@ -80,6 +80,7 @@ function renderDigest(container) {
   }
   
   let digest = getDigest();
+  const statusHistory = getStatusHistory().slice(0, 5);
   
   container.innerHTML = `
     <div class="route-container">
@@ -97,6 +98,28 @@ function renderDigest(container) {
       <p class="text-small text-secondary spacing-md">Demo Mode: Daily 9AM trigger simulated manually.</p>
       
       <div id="digestContent"></div>
+      
+      ${statusHistory.length > 0 ? `
+        <div class="card spacing-md">
+          <div class="card__header">
+            <h3 class="card__title">Recent Status Updates</h3>
+          </div>
+          <div class="card__body">
+            ${statusHistory.map(update => `
+              <div class="status-update">
+                <div class="status-update__info">
+                  <p class="status-update__job">${update.jobTitle}</p>
+                  <p class="status-update__company">${update.company}</p>
+                </div>
+                <div class="status-update__meta">
+                  <span class="badge ${getStatusBadgeClass(update.status)}">${update.status}</span>
+                  <span class="text-small text-secondary">${formatDate(update.changedAt)}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
     </div>
   `;
   
@@ -125,6 +148,21 @@ function renderDigest(container) {
     
     renderDigestContent(digest);
   }
+}
+
+function formatDate(isoString) {
+  const date = new Date(isoString);
+  const now = new Date();
+  const diffMs = now - date;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMs / 3600000);
+  const diffDays = Math.floor(diffMs / 86400000);
+  
+  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffHours < 24) return `${diffHours}h ago`;
+  if (diffDays < 7) return `${diffDays}d ago`;
+  
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
 function renderDigestContent(digest) {

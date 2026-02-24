@@ -52,6 +52,7 @@ let currentFilters = {
   mode: '',
   experience: '',
   source: '',
+  status: '',
   showOnlyMatches: false
 };
 
@@ -108,6 +109,14 @@ function renderDashboard(container) {
           <option value="Glassdoor" ${currentFilters.source === 'Glassdoor' ? 'selected' : ''}>Glassdoor</option>
         </select>
         
+        <select id="statusFilter" class="input filter-input">
+          <option value="">All Statuses</option>
+          <option value="Not Applied" ${currentFilters.status === 'Not Applied' ? 'selected' : ''}>Not Applied</option>
+          <option value="Applied" ${currentFilters.status === 'Applied' ? 'selected' : ''}>Applied</option>
+          <option value="Rejected" ${currentFilters.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+          <option value="Selected" ${currentFilters.status === 'Selected' ? 'selected' : ''}>Selected</option>
+        </select>
+        
         <select id="sortBy" class="input filter-input">
           <option value="latest" ${currentSort === 'latest' ? 'selected' : ''}>Latest</option>
           <option value="matchScore" ${currentSort === 'matchScore' ? 'selected' : ''}>Match Score</option>
@@ -152,6 +161,11 @@ function renderDashboard(container) {
     renderJobList();
   });
   
+  document.getElementById('statusFilter').addEventListener('change', (e) => {
+    currentFilters.status = e.target.value;
+    renderJobList();
+  });
+  
   document.getElementById('sortBy').addEventListener('change', (e) => {
     currentSort = e.target.value;
     renderJobList();
@@ -173,10 +187,11 @@ function renderJobList() {
   
   let jobs = [...sampleJobs];
   
-  // Calculate match scores
+  // Calculate match scores and add status
   jobs = jobs.map(job => ({
     ...job,
-    matchScore: calculateMatchScore(job, preferences)
+    matchScore: calculateMatchScore(job, preferences),
+    status: getJobStatus(job.id)
   }));
   
   // Apply filters (AND logic)
@@ -194,6 +209,7 @@ function renderJobList() {
     if (currentFilters.mode && job.mode !== currentFilters.mode) return false;
     if (currentFilters.experience && job.experience !== currentFilters.experience) return false;
     if (currentFilters.source && job.source !== currentFilters.source) return false;
+    if (currentFilters.status && job.status !== currentFilters.status) return false;
     
     if (currentFilters.showOnlyMatches && preferences) {
       if (job.matchScore < preferences.minMatchScore) return false;
@@ -233,7 +249,10 @@ function renderJobList() {
           <h3 class="job-card__title">${job.title}</h3>
           <p class="job-card__company">${job.company} • ${job.location} • ${job.mode}</p>
         </div>
-        ${preferences ? `<span class="badge ${getScoreBadgeClass(job.matchScore)}">${getScoreBadgeText(job.matchScore)}</span>` : ''}
+        <div class="job-card__badges">
+          ${preferences ? `<span class="badge ${getScoreBadgeClass(job.matchScore)}">${getScoreBadgeText(job.matchScore)}</span>` : ''}
+          <span class="badge ${getStatusBadgeClass(job.status)}">${job.status}</span>
+        </div>
       </div>
       <p class="job-card__description">${job.description}</p>
       <div class="job-card__meta">
@@ -242,6 +261,9 @@ function renderJobList() {
         <span class="job-card__meta-item">${job.postedDaysAgo}d ago</span>
         <span class="job-card__meta-item">${job.source}</span>
         ${job.salary ? `<span class="job-card__meta-item">${job.salary}</span>` : ''}
+      </div>
+      <div class="job-card__actions">
+        ${renderStatusButtons(job.id, job.status, job.title, job.company)}
       </div>
     </div>
   `).join('');
