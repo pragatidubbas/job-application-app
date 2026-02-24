@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Notification App - Design System Example</title>
+  <link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+  
+  <div class="app-container">
+    
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div class="top-bar__brand">Job Notification App</div>
+      <div class="top-bar__progress">Step 1 / 4</div>
+      <div class="top-bar__status">In Progress</div>
+    </header>
+    
+    <!-- CONTEXT HEADER -->
+    <section class="context-header">
+      <h1 class="context-header__title">Configure Your Notifications</h1>
+      <p class="context-header__subtitle">Set up how and when you want to receive job alerts that match your criteria.</p>
+    </section>
+    
+    <!-- MAIN WORKSPACE -->
+    <main class="main-workspace">
+      
+      <!-- PRIMARY WORKSPACE (70%) -->
+      <div class="primary-workspace">
+        
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Notification Preferences</h2>
+          </div>
+          <div class="card__body">
+            
+            <div class="spacing-md">
+              <label class="label" for="email">Email Address</label>
+              <input type="email" id="email" class="input" placeholder="your@email.com">
+            </div>
+            
+            <div class="spacing-md">
+              <label class="label" for="frequency">Notification Frequency</label>
+              <input type="text" id="frequency" class="input" placeholder="Daily, Weekly, or Instant">
+            </div>
+            
+            <div class="spacing-md">
+              <button class="btn btn-primary">Save Preferences</button>
+              <button class="btn btn-secondary">Cancel</button>
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Active Alerts</h2>
+          </div>
+          <div class="card__body">
+            <div class="empty-state">
+              <h3 class="empty-state__title">No alerts configured yet</h3>
+              <p class="empty-state__message">Create your first job alert to start receiving notifications about opportunities that match your criteria.</p>
+              <button class="btn btn-primary">Create Alert</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- SECONDARY PANEL (30%) -->
+      <aside class="secondary-panel">
+        
+        <div class="card">
+          <div class="card__header">
+            <h3 class="card__title">Step Explanation</h3>
+          </div>
+          <div class="card__body">
+            <p class="body-text text-secondary spacing-md">
+              Configure how you want to receive notifications. You can adjust these settings at any time.
+            </p>
+            
+            <div class="prompt-box">
+              <div class="prompt-box__content">Example prompt or code snippet can be placed here for reference.</div>
+            </div>
+            
+            <button class="btn btn-secondary">Copy Prompt</button>
+          </div>
+        </div>
+        
+      </aside>
+      
+    </main>
+    
+    <!-- PROOF FOOTER -->
+    <footer class="proof-footer">
+      <h4 class="proof-footer__title">Progress</h4>
+      <ul class="proof-checklist">
+        <li class="proof-checklist__item proof-checklist__item--complete">□ UI Built</li>
+        <li class="proof-checklist__item proof-checklist__item--complete">□ Logic Working</li>
+        <li class="proof-checklist__item">□ Test Passed</li>
+        <li class="proof-checklist__item">□ Deployed</li>
+      </ul>
+    </footer>
+    
+  </div>
+  
+</body>
+</html>
