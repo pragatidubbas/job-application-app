@@ -38,15 +38,22 @@ function renderRoute(path) {
   const route = routes[path] || routes['404'];
   const content = document.getElementById('app-content');
   
-  content.innerHTML = `
-    <div class="route-container">
-      <h1 class="route-container__title">${route.title}</h1>
-      <p class="route-container__subtitle">${route.subtitle}</p>
-    </div>
-  `;
-  
   updateActiveLink(path);
   document.title = `${route.title} - Job Notification App`;
+  
+  // Route-specific rendering
+  if (path === '/settings') {
+    renderSettings(content);
+  } else if (path === '/' || path === '/dashboard') {
+    renderDashboard(content);
+  } else {
+    content.innerHTML = `
+      <div class="route-container">
+        <h1 class="route-container__title">${route.title}</h1>
+        <p class="route-container__subtitle">${route.subtitle}</p>
+      </div>
+    `;
+  }
 }
 
 function updateActiveLink(path) {
