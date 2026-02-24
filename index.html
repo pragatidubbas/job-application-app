@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Notification App</title>
+  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="navigation.css">
+</head>
+<body>
+  
+  <div class="app-container">
+    
+    <!-- SHARED TOP NAVIGATION -->
+    <nav class="top-nav">
+      <div class="top-nav__brand">Job Notification App</div>
+      
+      <button class="top-nav__hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul class="top-nav__links" id="navLinks">
+        <li><a href="/" class="top-nav__link" data-route="/">Dashboard</a></li>
+        <li><a href="/saved" class="top-nav__link" data-route="/saved">Saved</a></li>
+        <li><a href="/digest" class="top-nav__link" data-route="/digest">Digest</a></li>
+        <li><a href="/settings" class="top-nav__link" data-route="/settings">Settings</a></li>
+        <li><a href="/proof" class="top-nav__link" data-route="/proof">Proof</a></li>
+      </ul>
+    </nav>
+    
+    <!-- ROUTE CONTENT -->
+    <div id="app-content"></div>
+    
+  </div>
+  
+  <script src="router.js"></script>
+  
+</body>
+</html>
