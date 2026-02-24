@@ -641,3 +641,131 @@ select[multiple].input {
     gap: var(--space-sm);
   }
 }
+
+
+/* ============================================
+   DIGEST EMAIL LAYOUT
+   ============================================ */
+.digest-email {
+  max-width: var(--text-max-width);
+  margin: 0 auto;
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+}
+
+.digest-email__header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.digest-email__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-heading-lg);
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-primary);
+}
+
+.digest-email__date {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+}
+
+.digest-email__body {
+  margin-bottom: var(--space-lg);
+}
+
+.digest-email__footer {
+  text-align: center;
+  padding-top: var(--space-md);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+/* ============================================
+   DIGEST JOB ITEMS
+   ============================================ */
+.digest-job {
+  padding: var(--space-md);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.digest-job:last-child {
+  border-bottom: none;
+}
+
+.digest-job__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.digest-job__number {
+  font-family: var(--font-serif);
+  font-size: var(--text-heading-md);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  min-width: 32px;
+}
+
+.digest-job__info {
+  flex: 1;
+}
+
+.digest-job__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-heading-md);
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-primary);
+}
+
+.digest-job__company {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+}
+
+.digest-job__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+  padding-left: 48px;
+}
+
+.digest-job__details span {
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+}
+
+.digest-job__apply {
+  margin-left: 48px;
+}
+
+/* ============================================
+   RESPONSIVE DIGEST
+   ============================================ */
+@media (max-width: 768px) {
+  .digest-email {
+    padding: var(--space-md);
+  }
+  
+  .digest-job__header {
+    flex-wrap: wrap;
+  }
+  
+  .digest-job__details {
+    padding-left: 0;
+  }
+  
+  .digest-job__apply {
+    margin-left: 0;
+  }
+}
